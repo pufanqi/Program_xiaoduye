@@ -3,6 +3,7 @@
 
 #include "production.h"
 #include "client.h"
+#include "pvd_flash.h"
 
 typedef enum state_
 {

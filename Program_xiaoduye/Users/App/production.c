@@ -7,19 +7,27 @@ uint16_t response_flag = 0;
 //生产初始化
 void Production_Init()
 {
-	product.Motor_DR = DIRE_PULL;  //初始状态为：远离步进电机
+	
+  if(Init_Read_Flash()==0)//未产生断电则赋初始值
+  {
+    product.Stoste_now = 1;
+    product.CO2_now = 0;
+    
+    material_last.stoste1 = 100;
+    material_last.stoste2 = 100;
+    material_last.CO2_1 = 100;
+    material_last.CO2_2 = 100;
+    material_last.CO2_max = 100;
+    material_last.stoste_max = 100;
+  }
+  product.Motor_DR = DIRE_PULL;  //初始状态为：远离步进电机
 	product.Motor_MF = MF_ENABLE; //初始状态为：使能制动
 	product.CO2_Flux = 0;
 	product.Water_Flux = 0;
-	product.Stoste_now = 1;
-	product.CO2_now = 0;
+
 	
-	material_last.CO2_1 = 100;
-	material_last.CO2_2 = 100;
-	material_last.stoste1 = 100;
-	material_last.stoste2 = 100;
-	material_last.CO2_max = 100;
-	material_last.stoste_max = 100;
+	
+	
 	
 	client.state=CLIENT_INIT;
 	client.fault_1=0;
